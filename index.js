@@ -14,12 +14,17 @@ var port = 8088;
 // server.verb('path' function(req, res, next){})
 function send(req, res, next){
 	res.send("Testing " + req.params.test);
-	return next;
+	return next();
 }
 
 server.get('/', send);
 server.get('/hello/:test', send);
 server.put('/hello/:test', send);
+server.post('/hello/:stuff', function(req, res, next){
+	res.send(201, req.params.stuff + "'s random String is: " +
+		Math.random().toString(36).substr(3,8));
+	return next();
+});
 server.del('/hello/:test', function(req, res, next){
 	res.send(req.params.test + " is now gone... deleted");
 	return next();
