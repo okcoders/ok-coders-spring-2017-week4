@@ -9,6 +9,7 @@
   "author": "Bobby Rockers <rrockers@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "mongoose": "^4.9.4",
     "restify": "^4.3.0"
   }
 }
