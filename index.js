@@ -12,16 +12,18 @@ var port = 8088;
 // delete | remove  | DELETE
 
 // server.verb('path' function(req, res, next){})
+function send(req, res, next){
+	res.send("Testing " + req.params.test);
+	return next;
+}
 
-server.get('/', function(req, res, next){
-	res.send("Hello World " + res);
-	next();
+server.get('/', send);
+server.get('/hello/:test', send);
+server.put('/hello/:test', send);
+server.del('/hello/:test', function(req, res, next){
+	res.send(req.params.test + " is now gone... deleted");
+	return next();
 });
-server.get('/hello/:firstname/:lastname', function(req, res, next){
-	res.send('Hello ' + req.params.firstname + " - " + req.params.lastname);
-	next();
-});
-
 
 server.listen(port, function(){
 	console.log('%s listening at %s', server.name, port);
